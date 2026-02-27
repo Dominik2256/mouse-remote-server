@@ -19,7 +19,7 @@ To use this server, you need the companion mobile app (Android).
 3. Run `MouseRemotePro.exe`.
 4. **Important:** Allow the application through the Windows Firewall when prompted by the system (otherwise, the phone won't connect).
 5. Go to the "Settings" tab, set your custom PIN, and click Save (you can leave it empty).
-6. Open the companion mobile app, enter the IP address displayed on the server's screen along with your PIN, and tap Connect.
+6. Open the companion mobile app,connect by entering the IP address displayed on the server's screen (or click device on a list) along with your PIN, and tap Connect.
 
 ## ⚙ How it Works
 The application runs a lightweight WebSocket server (powered by the `Fleck` library) strictly on your local Wi-Fi network. It listens for JSON-formatted commands from the mobile client and translates them into system-level Windows inputs (using `WindowsInput.dll`) or file I/O operations.
