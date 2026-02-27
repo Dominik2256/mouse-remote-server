@@ -18,7 +18,7 @@ To use this server, you need the companion mobile app (Android).
 2. Extract the files to a folder of your choice (e.g., on your Desktop or a USB drive).
 3. Run `MouseRemotePro.exe`.
 4. **Important:** Allow the application through the Windows Firewall when prompted by the system (otherwise, the phone won't connect).
-5. Go to the "Settings" tab, set your custom PIN, and click Save.
+5. Go to the "Settings" tab, set your custom PIN, and click Save (you can leave it empty).
 6. Open the companion mobile app, enter the IP address displayed on the server's screen along with your PIN, and tap Connect.
 
 ## ⚙ How it Works
