@@ -1,25 +1,46 @@
-# Mouse Remote Pro - Server
+# ◽ MouseRemotePro — Server
+---
+A high-performance, portable Windows background service that bridges your PC with the MouseRemote mobile ecosystem. 
 
-A lightweight, portable Windows application that turns your smartphone into a wireless mouse, keyboard, and file-transfer hub for your PC. This repository contains the C# .NET server-side application.
+## 🔘 System Specifications
+| Category | Details |
+| :--- | :--- |
+| **Framework** | .NET 10.0 (Windows Forms) |
+| **Deployment** | Self-contained Portable EXE (111 MB) |
+| **Networking** | Asynchronous TCP/IP Sockets |
+| **Port** | 8765 (Default) |
+| **OS Support** | Windows 10 / 11 (x64) |
 
-## ▣ Mobile App
-To use this server, you need the companion mobile app (Android). 
-**[⯈ Get the Mobile App repository here](https://github.com/Dominik2256/mouse-remote-client)**
+---
 
-## ❖ Features
-* **Remote Mouse & Keyboard:** Control your PC cursor and type remotely with low latency.
-* **Two-Way File Transfer:** Easily send files from your PC to your phone, or receive photos and documents from your phone directly to a local `temporary` folder on your PC.
-* **Fully Portable:** No installation required. All settings (like your custom PIN and Windows AutoStart preference) are saved locally in a simple `config.json` file.
-* **Auto-Update System:** Built-in updater that automatically fetches and installs the latest releases directly from GitHub.
-* **Secure Connection:** Local WebSocket connection protected by a custom PIN.
+## 📱 Mobile Companion
+To control this server, you need the official Android client.
+▫️ **[Get the Mobile App (.apk)](https://github.com/Dominik2256/mouse-remote-client)** ▫️
+---
 
-## ⯈ How to Use
-1. Go to the **Releases** section on the right side of this repository and download the latest `.zip` file.
-2. Extract the files to a folder of your choice (e.g., on your Desktop or a USB drive).
-3. Run `MouseRemotePro.exe`.
-4. **Important:** Allow the application through the Windows Firewall when prompted by the system (otherwise, the phone won't connect).
-5. Go to the "Settings" tab, set your custom PIN, and click Save (you can leave it empty).
-6. Open the companion mobile app,connect by entering the IP address displayed on the server's screen (or click device on a list) along with your PIN, and tap Connect.
+## 🚀 Key Features
+* ◽ **Ultra-Low Latency**: Optimized socket communication for real-time cursor response.
+* ◽ **System Integration**:
+    * ▫️ **Tray Operation**: Runs silently in the system tray.
+    * ▫️ **Auto-Start**: One-click Windows Registry integration for boot-up launch.
+* ◽ **Volume Management**: Deep integration with Windows CoreAudio API for master and app-level volume control.
+* ◽ **GitHub Sync**: Built-in update engine that checks for new releases directly via GitHub API.
+* ◽ **No-Install**: Completely portable; all configurations are stored locally in `config.json`.
 
-## ⚙ How it Works
-The application runs a lightweight WebSocket server (powered by the `Fleck` library) strictly on your local Wi-Fi network. It listens for JSON-formatted commands from the mobile client and translates them into system-level Windows inputs (using `WindowsInput.dll`) or file I/O operations.
+---
+
+## 🔧 How It Works
+The server operates as a listener on your local network.
+
+### ▫️ Connection Flow
+1. **Listening State**: Upon startup, the server opens a TCP socket on port `8765`.
+2. **Discovery**: It responds to broadcast pings from the mobile app for easy pairing.
+3. **Security**: Validates incoming packets using a user-defined PIN.
+4. **Execution**: Translates mobile gestures into native Windows `Input` events (Mouse/Keyboard).
+
+```mermaid
+graph LR
+  A[Mobile App] -- TCP Packet --> B(Port 8765)
+  B --> C{PIN Validation}
+  C -- Success --> D[Windows Input API]
+  C -- Fail --> E[Drop Connection]
